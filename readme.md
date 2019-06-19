@@ -5,6 +5,11 @@
 ## プログラム実行手順
 
 ```commandline
+git clone https://github.com/hyo07/proto-chain.git
+cd proto-chain
+```
+
+```commandline
 docker build -t {image_name} .
 docker run -it {image_name} bash
 

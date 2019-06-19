@@ -1,6 +1,6 @@
 **このプログラムは、[ゼロから創る暗号通貨](https://peaks.cc/books/cryptocurrency)さんのプログラムを元にしています。**
 
-ブロック作成の難易度: 3桁（bc03-parallel/04/blockchain/block.py）
+ブロック作成の難易度: 3桁（bc03-parallel/04/blockchain/block.py）  
 正当性チェックの難易度: 2桁（bc03-parallel/04/blockchain/blockchain_manager.py）
 
 
@@ -28,7 +28,7 @@ root@hoge:/{image_name}# python server1.py
 - 第１引数: 接続先IPアドレス
 - 第２引数: 接続先ポート
 
-なにも引数を与えない場合、デフォルトで`server1.py`のノードに接続される設定にされている（ip: 172.17.0.2, port: 50082）。
+なにも引数を与えない場合、デフォルトで`server1.py`のノードに接続される設定にされている（ip: 172.17.0.2, port: 50082）。  
 デフォルトの接続先を変えたい場合は、`core/client_core.py, server_core.py`の各コンストラクタの第２・第３引数を変更してください。
 
 

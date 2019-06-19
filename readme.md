@@ -1,3 +1,5 @@
+**このプログラムは、[ゼロから創る暗号通貨](https://peaks.cc/books/cryptocurrency)さんのプログラムを元にしています。**
+
 ブロック作成の難易度: 3桁（bc03-parallel/04/blockchain/block.py）
 正当性チェックの難易度: 2桁（bc03-parallel/04/blockchain/blockchain_manager.py）
 

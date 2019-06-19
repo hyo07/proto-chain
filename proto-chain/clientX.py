@@ -20,34 +20,28 @@ def shutdown_client():
     my_p2p_client.shutdown()
 
 
-def input_transaction():
+def make_transaction():
     """
-    好きなトランザクションを書き込む（上限３つまで）
+    好きなトランザクションを書き込む
     """
 
-    print("トランザクションを３つまで登録できます\n"
+    transaction_list = []
+    print("トランザクションを登録できます\n"
           "中断する場合は、'Ctlr + C'を入力してください\n")
-    transaction1 = input_set()
-    select_num = check_continue_input()
-    if select_num != 1:
-        print("5秒後、トランザクションを送信します\n"
-              "中断する場合は、'Ctlr + C'を入力してください")
-        sleep(5)
-        return transaction1, None, None
 
-    transaction2 = input_set()
-    select_num = check_continue_input()
-    if select_num != 1:
-        print("5秒後、トランザクションを送信します\n"
-              "中断する場合は、'Ctlr + C'を入力してください")
-        sleep(5)
-        return transaction1, transaction2, None
+    while True:
+        transaction = input_set()
+        transaction_list.append(transaction)
+        select_num = check_continue_input()
+        if select_num is 1:
+            pass
+        elif select_num is 2:
+            print("5秒後、トランザクションを送信します\n"
+                  "中断する場合は、'Ctlr + C'を入力してください")
+            sleep(5)
+            break
 
-    transaction3 = input_set()
-    print("5秒後、トランザクションを送信します\n"
-          "中断する場合は、'Ctlr + C'を入力してください")
-    sleep(5)
-    return transaction1, transaction2, transaction3
+    return transaction_list
 
 
 def input_set():
@@ -70,16 +64,21 @@ def check_continue_input():
     """
 
     print("続く操作を選択してください")
-    select_num = int(input(""" 
-    1: トランザクションの登録を続ける
-    2: 登録したトランザクションを送信する
-    >>>>> """))
-    return select_num
+    while True:
+        select_num = input(""" 
+        1: トランザクションの登録を続ける
+        2: 登録したトランザクションを送信する
+        >>>>> """)
+        if (select_num == "1") or (select_num == "2"):
+            break
+        else:
+            print("正しい値を入力してください（1 or 2）")
+    return int(select_num)
 
 
 def main():
 
-    transaction1, transaction2, transaction3 = input_transaction()
+    transaction_list = make_transaction()
     print("------------------------------------------------------------\n")
 
     signal.signal(signal.SIGINT, signal_handler)
@@ -98,20 +97,14 @@ def main():
 
     sleep(10)
 
-    if transaction1:
-        my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction1))
+    for transaction in transaction_list:
+        my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction))
+        sleep(3)
 
-    if transaction2:
-        my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction2))
-
-    if transaction3:
-        sleep(10)
-        my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction3))
+    sleep(10)
+    shutdown_client()
 
 
 if __name__ == '__main__':
     main()
-    # transaction1, transaction2, transaction3 = input_transaction()
-    # print(transaction1)
-    # print(transaction2)
-    # print(transaction3)
+

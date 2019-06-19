@@ -44,7 +44,9 @@ def main():
     }
 
     my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction))
-    print(json.dumps(transaction))
+
+    sleep(1)
+
     transaction2 = {
         'sender': 'test6',
         'recipient': 'test7',
@@ -53,7 +55,7 @@ def main():
 
     my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction2))
 
-    sleep(10)
+    sleep(1)
 
     transaction3 = {
         'sender': 'test8',

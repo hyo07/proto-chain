@@ -1,4 +1,5 @@
 import signal
+from time import sleep
 import sys
 
 from core.server_core import ServerCore
@@ -32,6 +33,8 @@ def main():
 
     my_p2p_server.start()
     my_p2p_server.join_network()
+    sleep(3)
+    my_p2p_server.get_all_chains_for_resolve_conflict()
 
 
 if __name__ == '__main__':

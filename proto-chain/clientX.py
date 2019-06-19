@@ -53,7 +53,7 @@ def input_set():
           "トランザクション登録")
     sender = input("sender: ")
     recipient = input("recipient: ")
-    value = input("value: ")
+    value = int(input("value: "))
 
     return {'sender': sender, 'recipient': recipient, 'value': value}
 
@@ -99,7 +99,7 @@ def main():
 
     for transaction in transaction_list:
         my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction))
-        sleep(1)
+        sleep(2)
 
     sleep(10)
     shutdown_client()

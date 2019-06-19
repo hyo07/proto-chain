@@ -26,11 +26,9 @@ def make_transaction(num=3):
     """
 
     transaction_list = []
-    print("トランザクションを登録できます\n"
-          "中断する場合は、'Ctlr + C'を入力してください\n")
 
     for i in range(1, num+1):
-        transaction_list.append({'sender': i, 'recipient': i, 'value': i})
+        transaction_list.append({'sender': str(i), 'recipient': str(i), 'value': i})
 
     return transaction_list
 
@@ -59,7 +57,7 @@ def main():
 
     for transaction in transaction_list:
         my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction))
-        sleep(1)
+        sleep(2)
 
     sleep(10)
     shutdown_client()

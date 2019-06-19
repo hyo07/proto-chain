@@ -20,7 +20,7 @@ def shutdown_client():
     my_p2p_client.shutdown()
 
 
-def make_transaction():
+def make_transaction(num=3):
     """
     好きなトランザクションを書き込む
     """
@@ -29,56 +29,16 @@ def make_transaction():
     print("トランザクションを登録できます\n"
           "中断する場合は、'Ctlr + C'を入力してください\n")
 
-    while True:
-        transaction = input_set()
-        transaction_list.append(transaction)
-        select_num = check_continue_input()
-        if select_num is 1:
-            pass
-        elif select_num is 2:
-            print("5秒後、トランザクションを送信します\n"
-                  "中断する場合は、'Ctlr + C'を入力してください")
-            sleep(5)
-            break
+    for i in range(1, num+1):
+        transaction_list.append({'sender': i, 'recipient': i, 'value': i})
 
     return transaction_list
 
 
-def input_set():
-    """
-    値受け取り部分
-    """
-
-    print("-------------------------\n"
-          "トランザクション登録")
-    sender = input("sender: ")
-    recipient = input("recipient: ")
-    value = input("value: ")
-
-    return {'sender': sender, 'recipient': recipient, 'value': value}
-
-
-def check_continue_input():
-    """
-    登録を続行か、送信かの選択
-    """
-
-    print("続く操作を選択してください")
-    while True:
-        select_num = input(""" 
-        1: トランザクションの登録を続ける
-        2: 登録したトランザクションを送信する
-        >>>>> """)
-        if (select_num == "1") or (select_num == "2"):
-            break
-        else:
-            print("正しい値を入力してください（1 or 2）")
-    return int(select_num)
-
-
 def main():
 
-    transaction_list = make_transaction()
+    tran_num = int(input("送信するトランザクションの数を入力（半角数字）： "))
+    transaction_list = make_transaction(tran_num)
     print("------------------------------------------------------------\n")
 
     signal.signal(signal.SIGINT, signal_handler)

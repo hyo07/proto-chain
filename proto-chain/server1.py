@@ -1,8 +1,10 @@
 import signal
+import sys
 
 from core.server_core import ServerCore
 
 
+args = sys.argv
 my_p2p_server = None
 
 
@@ -19,7 +21,7 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
     global my_p2p_server
     # 始原のCoreノードとして起動する
-    my_p2p_server = ServerCore(50082)
+    my_p2p_server = ServerCore(50082, core_node_host=None, core_node_port=None)
     my_p2p_server.start()
 
 

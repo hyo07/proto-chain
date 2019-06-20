@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  server:
+    build: ./
+    volumes:
+      - "./proto-chain:/proto-chain"
+    entrypoint: ["python", "/proto-chain/server1.py"]
+  client1:
+    build: ./
+#    depends_on:
+#      - "server"
+    volumes:
+      - "./proto-chain:/proto-chain"
+    entrypoint: ["python", "/proto-chain/client1.py", "172.20.0.2"]
+
+  client2:
+    build: ./
+#    depends_on:
+#      - "server"
+    volumes:
+      - "./proto-chain:/proto-chain"
+    entrypoint: ["python", "/proto-chain/client1.py", "172.20.0.2"]
+
+networks:
+  default:

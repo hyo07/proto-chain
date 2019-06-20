@@ -1,8 +1,9 @@
 FROM python:latest
 
-COPY ./ /
 RUN pip install pycrypto
+COPY ./proto-chain /proto-chain
 
-WORKDIR /proto-chain
 
-CMD echo "plesec command 'docker run -it {REPOSITORY} bash'"
+#WORKDIR /proto-chain
+
+#ENTRYPOINT ["python", "server1.py"]

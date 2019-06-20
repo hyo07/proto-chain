@@ -1,25 +1,42 @@
 version: "3.7"
 services:
-  server:
+  server1:
     build: ./
     volumes:
       - "./proto-chain:/proto-chain"
     entrypoint: ["python", "/proto-chain/server1.py"]
-  client1:
-    build: ./
-#    depends_on:
-#      - "server"
-    volumes:
-      - "./proto-chain:/proto-chain"
-    entrypoint: ["python", "/proto-chain/client1.py", "172.20.0.2"]
 
-  client2:
+  server2:
     build: ./
-#    depends_on:
-#      - "server"
+    depends_on:
+      - "server1"
     volumes:
       - "./proto-chain:/proto-chain"
-    entrypoint: ["python", "/proto-chain/client1.py", "172.20.0.2"]
+    entrypoint: ["python", "/proto-chain/server2.py", "172.20.0.2", "50082"]
+
+  server3:
+    build: ./
+    depends_on:
+      - "server1"
+    volumes:
+      - "./proto-chain:/proto-chain"
+    entrypoint: ["python", "/proto-chain/server3.py", "172.20.0.2", "50082"]
+
+#  client1:
+#    build: ./
+#    depends_on:
+#      - "server1"
+#    volumes:
+#      - "./proto-chain:/proto-chain"
+#    entrypoint: ["python", "/proto-chain/client1.py", "172.20.0.2", "50082"]
+#
+#  client2:
+#    build: ./
+#    depends_on:
+#      - "client1"
+#    volumes:
+#      - "./proto-chain:/proto-chain"
+#    entrypoint: ["python", "/proto-chain/client1.py", "172.20.0.2", "50082"]
 
 networks:
   default:

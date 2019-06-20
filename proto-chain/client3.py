@@ -65,6 +65,10 @@ def main():
 
     my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction3))
 
+    sleep(10)
+    shutdown_client()
+    # sys.exit()
+
 
 if __name__ == '__main__':
     main()

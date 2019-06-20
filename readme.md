@@ -16,9 +16,10 @@ docker build -t {image_name} .
 docker run -it {image_name} bash
 
 root@hoge:/{image_name}# 
+root@hoge:/{image_name}# python server1.py
+root@hoge:/{image_name}# python server2.py
 root@hoge:/{image_name}# python client1.py
 root@hoge:/{image_name}# python client2.py
-root@hoge:/{image_name}# python server1.py
 ```
 かなり酷い使い方だとdocker触りたての私でも分かるため、なるべく早くdocker-composeなりで動くようにしたいと思っています。
 

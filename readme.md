@@ -14,13 +14,15 @@ cd proto-chain
 ```commandline
 docker build -t {image_name} .
 docker run -it {image_name} bash
-
-root@hoge:/{image_name}# 
-root@hoge:/{image_name}# python server1.py
-root@hoge:/{image_name}# python server2.py
-root@hoge:/{image_name}# python client1.py
-root@hoge:/{image_name}# python client2.py
 ```
+コンテナを起動し、２番目のコマンドで起動してあるコンテナにbashで入れます。  
+その後、
+```commandline
+root@hoge:/{image_name}# python server1.py
+```
+とすれば、そのコンテナで`server1.py`を起動できます。  
+あとは同じ手順を複数回行い、実行するプログラムを変えれば、仮想敵に別端末を用意し、通信を行わせることができます。  
+<br>
 かなり酷い使い方だとdocker触りたての私でも分かるため、なるべく早くdocker-composeなりで動くようにしたいと思っています。
 
 

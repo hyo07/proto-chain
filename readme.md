@@ -22,14 +22,15 @@ docker run -it {image_name} python {file_name} {接続先IP} {接続先port}
 ```commandline
 docker-compose up --build
 ```
-で、server３種を一括で起動。このとき、環境によってはIPアドレスが変わってしまうため、その場合は、
+で、server３種を一括で起動。このとき、環境によってはIPアドレスが変わってしまうため、  
+その場合は`docker-compose.yaml`のENDPOINTを書き換える。  
 
 docker-composeで一括起動をした場合、は、
 ```commandline
 docker network ls
 docker run -it --net={network_name} {image_name} python {file_name} {接続先IP} {接続先port}
 ```
-以上のように、ネットワークを指定する。  
+以上のように、ネットワークを指定すると、別ターミナルから接続できる。もちろんcomposeを書き換えるのもあり。  
 
 ## 実行時の引数
 `server1.py`以外のserver, clientのプログラムには引数を与えることが可能。

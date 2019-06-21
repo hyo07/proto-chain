@@ -4,6 +4,9 @@ services:
     build: ./
     volumes:
       - "./proto-chain:/proto-chain"
+#    networks:
+#      app_net:
+#        ipv4_address: "172.30.0.2"
     entrypoint: ["python", "/proto-chain/server1.py"]
 
   server2:
@@ -12,31 +15,45 @@ services:
       - "server1"
     volumes:
       - "./proto-chain:/proto-chain"
+#    networks:
+#      app_net:
+#        ipv4_address: "172.30.0.3"
     entrypoint: ["python", "/proto-chain/server2.py", "172.23.0.2", "50082"]
 
   server3:
     build: ./
     depends_on:
+      - "server2"
+    volumes:
+      - "./proto-chain:/proto-chain"
+#    networks:
+#      app_net:
+#        ipv4_address: "172.30.0.4"
+    entrypoint: ["python", "/proto-chain/server3.py", "172.23.0.2", "50082"]
+
+  client1:
+    build: ./
+    depends_on:
       - "server1"
     volumes:
       - "./proto-chain:/proto-chain"
-    entrypoint: ["python", "/proto-chain/server3.py", "172.23.0.2", "50082"]
+    entrypoint: ["python", "/proto-chain/client1.py", "172.23.0.2", "50082"]
 
-#  client1:
-#    build: ./
-#    depends_on:
-#      - "server1"
-#    volumes:
-#      - "./proto-chain:/proto-chain"
-#    entrypoint: ["python", "/proto-chain/client1.py", "172.22.0.2", "50082"]
-#
-#  client2:
-#    build: ./
-#    depends_on:
-#      - "client1"
-#    volumes:
-#      - "./proto-chain:/proto-chain"
-#    entrypoint: ["python", "/proto-chain/client1.py", "172.22.0.2", "50082"]
+  client2:
+    build: ./
+    depends_on:
+      - "server2"
+    volumes:
+      - "./proto-chain:/proto-chain"
+    entrypoint: ["python", "/proto-chain/client2.py", "172.23.0.3", "50090"]
 
 networks:
   default:
+
+#networks:
+#  app_net:
+#    driver: "bridge"
+#    ipam:
+#     driver: "default"
+#     config:
+#       - subnet: "172.30.0.0/24"

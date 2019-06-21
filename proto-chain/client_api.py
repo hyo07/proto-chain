@@ -21,14 +21,14 @@ def shutdown_client():
 
 
 def main():
-    tran_list = call_api.call_api(int(args[1]))
+    tran_list = call_api.call_api()
     signal.signal(signal.SIGINT, signal_handler)
     global my_p2p_client
 
     try:
-        if args[3]:
+        if args[2]:
             my_p2p_client = ClientCore(50095, args[1], int(args[2]))
-        elif args[2]:
+        elif args[1]:
             my_p2p_client = ClientCore(50095, args[1])
         else:
             my_p2p_client = ClientCore(50095)

@@ -13,18 +13,23 @@ cd proto-chain
 
 ```commandline
 docker build -t {image_name} .
-docker run -it {image_name} bash
+docker run -it {image_name} python {file_name} {接続先IP} {接続先port}
 ```
-コンテナを起動し、２番目のコマンドで起動してあるコンテナにbashで入れます。  
-その後、
-```commandline
-root@hoge:/{image_name}# python server1.py
-```
-とすれば、そのコンテナで`server1.py`を起動できます。  
-あとは同じ手順を複数回行い、実行するプログラムを変えれば、仮想敵に別端末を用意し、通信を行わせることができます。  
+`server1.py`を起動するときのみ、IPやportなどの引数はいらない。  
+引数に関することは後述。  
 <br>
-かなり酷い使い方だとdocker触りたての私でも分かるため、なるべく早くdocker-composeなりで動くようにしたいと思っています。
+また、
+```commandline
+docker-compose up --build
+```
+で、server３種を一括で起動。このとき、環境によってはIPアドレスが変わってしまうため、その場合は、
 
+docker-composeで一括起動をした場合、は、
+```commandline
+docker network ls
+docker run -it --net={network_name} {image_name} python {file_name} {接続先IP} {接続先port}
+```
+以上のように、ネットワークを指定する。  
 
 ## 実行時の引数
 `server1.py`以外のserver, clientのプログラムには引数を与えることが可能。
@@ -40,3 +45,6 @@ root@hoge:/{image_name}# python server1.py
     - 各トランザクションを送るときに、sleep(2)を入れたら、今の所漏れはなくなっている
     - sleep(1)だと漏れることある
     - 違う設計やデータを扱うときには、2秒じゃ無くなる可能性あるから困る
+# **上の課題について**
+ローカルで同じ処理を行うと、60トランザクションをsleep(0)で行っても漏れがなかった。  
+dockerの問題な模様？

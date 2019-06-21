@@ -12,7 +12,7 @@ services:
       - "server1"
     volumes:
       - "./proto-chain:/proto-chain"
-    entrypoint: ["python", "/proto-chain/server2.py", "172.20.0.2", "50082"]
+    entrypoint: ["python", "/proto-chain/server2.py", "172.23.0.2", "50082"]
 
   server3:
     build: ./
@@ -20,7 +20,7 @@ services:
       - "server1"
     volumes:
       - "./proto-chain:/proto-chain"
-    entrypoint: ["python", "/proto-chain/server3.py", "172.20.0.2", "50082"]
+    entrypoint: ["python", "/proto-chain/server3.py", "172.23.0.2", "50082"]
 
 #  client1:
 #    build: ./
@@ -28,7 +28,7 @@ services:
 #      - "server1"
 #    volumes:
 #      - "./proto-chain:/proto-chain"
-#    entrypoint: ["python", "/proto-chain/client1.py", "172.20.0.2", "50082"]
+#    entrypoint: ["python", "/proto-chain/client1.py", "172.22.0.2", "50082"]
 #
 #  client2:
 #    build: ./
@@ -36,7 +36,7 @@ services:
 #      - "client1"
 #    volumes:
 #      - "./proto-chain:/proto-chain"
-#    entrypoint: ["python", "/proto-chain/client1.py", "172.20.0.2", "50082"]
+#    entrypoint: ["python", "/proto-chain/client1.py", "172.22.0.2", "50082"]
 
 networks:
   default:

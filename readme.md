@@ -49,3 +49,7 @@ docker run -it --net={network_name} {image_name} python {file_name} {接続先IP
 # **上の課題について**
 ローカルで同じ処理を行うと、60トランザクションをsleep(0)で行っても漏れがなかった。  
 dockerの問題な模様？
+
+# 更新
+- observer周り
+    - ブロックチェーンをsqliteに保存する周り。DB設計とかsqilte使ってることとかは仮置き

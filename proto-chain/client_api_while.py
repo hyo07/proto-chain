@@ -33,7 +33,11 @@ def main():
         tran_list = call_api.call_api()
         for tran in tran_list:
             my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(tran))
-        shutdown_client()
+        try:
+            shutdown_client()
+        except ConnectionRefusedError:
+            sleep(5)
+            continue
         sleep(4.5)
 
 

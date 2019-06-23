@@ -14,7 +14,6 @@ def res_resize(data):
     id = route + "/" + from_stop + "/" + from_time
 
     return {
-        "index": None,
         "id": id,
         "route": route,
         "note": note,
@@ -27,11 +26,8 @@ def res_resize(data):
 def call_api():
     res = requests.get(url).json()
     res_list = []
-    count = 0
     for data in res:
         res_dic = res_resize(data)
-        res_dic["index"] = count
-        count += 1
         res_list.append(res_dic)
     return res_list
 

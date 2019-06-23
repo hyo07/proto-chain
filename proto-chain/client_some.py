@@ -55,12 +55,17 @@ def main():
 
     sleep(10)
 
+    # count = 0
     for transaction in transaction_list:
         my_p2p_client.send_message_to_my_core_node(MSG_NEW_TRANSACTION, json.dumps(transaction))
-        sleep(2)
+        # count += 1
+        # if count == 49:
+        #     count = 0
+        #     sleep(5)
+        # sleep(2)
 
-    sleep(10)
-    shutdown_client()
+    # sleep(10)
+    # shutdown_client()
 
 
 if __name__ == '__main__':

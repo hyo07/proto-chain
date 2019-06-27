@@ -155,8 +155,8 @@ class ObserverCore(object):
                     self.prev_block_hash = self.bm.get_hash(new_block)
                     self.bm.set_new_block(new_block)
                 else:
-                    # 　ブロックとして不正ではないがVerifyにコケる場合は自分がorphanブロックを生成している
-                    # 　可能性がある
+                    # ブロックとして不正ではないがVerifyにコケる場合は自分がorphanブロックを生成している
+                    # 可能性がある
                     self.get_all_chains_for_resolve_conflict()
 
             elif msg[2] == RSP_FULL_CHAIN:
